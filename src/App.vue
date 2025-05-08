@@ -65,39 +65,66 @@ watch(
 </script>
 
 <template>
-  <form @submit.prevent="handleAdd">
-    <label>Todolist</label>
-    <div>
-      <input v-model="keyword" type="text" placeholder="เช่น ซื้อข้าว" />
-      <button type="submit" style="margin-left: 8px">Add</button>
-    </div>
-  </form>
-
-  <ol>
-    <li v-for="item in lists" :key="item.id">
-      <div v-if="!item.isEdit">
+  <main class="container mx-auto w-fit">
+    <form
+      @submit.prevent="handleAdd"
+      class="flex flex-col items-center gap-2 mt-5"
+    >
+      <label class="text-center">Todolist</label>
+      <div class="flex gap-5">
         <input
-          type="checkbox"
-          :checked="item.isCompleted"
-          @change="toggleCompleted(item.id)"
-        />
-        <span :class="{ completed: item.isCompleted }">
-          {{ item.keyword }}
-        </span>
-        <button @click="handleEdit(item.id)">Edit</button>
-        <button @click="handleDelete(item.id)">Delete</button>
-      </div>
-
-      <div v-else>
-        <input
+          v-model="keyword"
           type="text"
-          v-model="item.keyword"
-          @keyup.enter="handleSave(item.id, item.keyword)"
+          placeholder="เช่น ซื้อข้าว"
+          class="border rounded-full p-2"
         />
-        <button @click="handleSave(item.id, item.keyword)">Save</button>
+        <button type="submit" class="border p-2 rounded-full w-24">Add</button>
       </div>
-    </li>
-  </ol>
-</template>
+    </form>
 
-<style scoped></style>
+    <ol class="flex flex-col justify-start items-start gap-2 mt-5">
+      <li v-for="item in lists" :key="item.id">
+        <div v-if="!item.isEdit" class="flex gap-2">
+          <input
+            type="checkbox"
+            :checked="item.isCompleted"
+            @change="toggleCompleted(item.id)"
+          />
+          <span
+            class="flex justify-center items-center w-fit"
+            :class="[item.isCompleted && 'line-through text-gray-400']"
+          >
+            {{ item.keyword }}
+          </span>
+          <button
+            @click="handleEdit(item.id)"
+            class="border p-2 rounded-full w-24"
+          >
+            Edit
+          </button>
+          <button
+            @click="handleDelete(item.id)"
+            class="border p-2 rounded-full w-24"
+          >
+            Delete
+          </button>
+        </div>
+
+        <div v-else class="flex gap-2">
+          <input
+            type="text"
+            v-model="item.keyword"
+            class="border p-2 rounded-full"
+            @keyup.enter="handleSave(item.id, item.keyword)"
+          />
+          <button
+            @click="handleSave(item.id, item.keyword)"
+            class="border p-2 rounded-full w-24"
+          >
+            Save
+          </button>
+        </div>
+      </li>
+    </ol>
+  </main>
+</template>
