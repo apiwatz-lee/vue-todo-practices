@@ -38,11 +38,11 @@ const handleEdit = (id) => {
 const handleSave = (id, newKeyword) => {
   const trimmed = newKeyword.trim();
   if (!trimmed) return;
-
   const item = lists.value.find((i) => i.id === id);
   if (item) {
     item.keyword = trimmed;
     item.isEdit = false;
+    editId.value = 0;
   }
 };
 
