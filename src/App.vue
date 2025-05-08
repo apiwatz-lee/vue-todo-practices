@@ -7,6 +7,7 @@ const generateId = () => ++idCounter;
 
 const lists = ref([]);
 const keyword = ref('');
+const editId = ref(0);
 
 // Add new item
 const handleAdd = () => {
@@ -30,9 +31,7 @@ const handleDelete = (id) => {
 
 // Enter edit mode for specific item
 const handleEdit = (id) => {
-  lists.value.forEach((item) => {
-    item.isEdit = item.id === id;
-  });
+  editId.value = id;
 };
 
 // Save edited item
@@ -48,11 +47,8 @@ const handleSave = (id, newKeyword) => {
 };
 
 // Toggle completed status
-const toggleCompleted = (id) => {
-  const item = lists.value.find((i) => i.id === id);
-  if (item) {
-    item.isCompleted = !item.isCompleted;
-  }
+const toggleCompleted = (item) => {
+  item.isCompleted = !item.isCompleted;
 };
 
 watch(
@@ -84,11 +80,11 @@ watch(
 
     <ol class="flex flex-col justify-start items-start gap-2 mt-5">
       <li v-for="item in lists" :key="item.id">
-        <div v-if="!item.isEdit" class="flex gap-2">
+        <div v-if="item.id !== editId" class="flex gap-2">
           <input
             type="checkbox"
             :checked="item.isCompleted"
-            @change="toggleCompleted(item.id)"
+            @change="toggleCompleted(item)"
           />
           <span
             class="flex justify-center items-center w-fit"
