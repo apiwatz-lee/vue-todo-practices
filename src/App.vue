@@ -65,22 +65,17 @@ watch(
 </script>
 
 <template>
-  <form @submit.prevent="handleAdd" class="form">
+  <form @submit.prevent="handleAdd">
     <label>Todolist</label>
     <div>
-      <input
-        v-model="keyword"
-        type="text"
-        placeholder="เช่น ซื้อข้าว"
-        class="input"
-      />
+      <input v-model="keyword" type="text" placeholder="เช่น ซื้อข้าว" />
       <button type="submit" style="margin-left: 8px">Add</button>
     </div>
   </form>
 
-  <ol class="list-container">
-    <li v-for="item in lists" :key="item.id" class="list-wrapper">
-      <div v-if="!item.isEdit" class="list-content">
+  <ol>
+    <li v-for="item in lists" :key="item.id">
+      <div v-if="!item.isEdit">
         <input
           type="checkbox"
           :checked="item.isCompleted"
@@ -93,10 +88,9 @@ watch(
         <button @click="handleDelete(item.id)">Delete</button>
       </div>
 
-      <div v-else class="list-content">
+      <div v-else>
         <input
           type="text"
-          class="input"
           v-model="item.keyword"
           @keyup.enter="handleSave(item.id, item.keyword)"
         />
@@ -106,39 +100,4 @@ watch(
   </ol>
 </template>
 
-<style scoped>
-.input {
-  border-radius: 24px;
-  height: 24px;
-  padding: 8px;
-}
-
-.form {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 8px;
-}
-
-.list-container {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.list-content {
-  display: flex;
-  justify-content: start;
-  align-items: center;
-}
-
-.completed {
-  text-decoration: line-through;
-  color: gray;
-}
-
-button {
-  margin-left: 8px;
-}
-</style>
+<style scoped></style>
