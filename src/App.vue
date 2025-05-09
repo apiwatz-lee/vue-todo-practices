@@ -1,16 +1,15 @@
 <script setup>
 import { ref, watch } from 'vue';
+import TodoForm from './components/TodoForm.vue';
 
 // generate unique id
 let idCounter = 0;
 const generateId = () => ++idCounter;
-
 const lists = ref([]);
-const keyword = ref('');
 const editId = ref(0);
 
 // Add new item
-const handleAdd = () => {
+const handleAdd = (keyword) => {
   const trimmed = keyword.value.trim();
   if (!trimmed) return;
 
@@ -51,37 +50,18 @@ const toggleCompleted = (item) => {
   item.isCompleted = !item.isCompleted;
 };
 
-watch(
-  lists,
-  (newVal) => {
-    console.log('--- new ----', newVal);
-  },
-  { deep: true }
-);
+// watch(
+//   lists,
+//   (newVal) => {
+//     console.log('--- new ----', newVal);
+//   },
+//   { deep: true }
+// );
 </script>
 
 <template>
   <main class="container mx-auto w-fit">
-    <form
-      @submit.prevent="handleAdd"
-      class="flex flex-col items-center gap-2 mt-5"
-    >
-      <label class="text-center">Todolist</label>
-      <div class="flex gap-5">
-        <input
-          v-model="keyword"
-          type="text"
-          placeholder="เช่น ซื้อข้าว"
-          class="border rounded-full p-2"
-        />
-        <button
-          type="submit"
-          class="border p-2 rounded-full w-24 cursor-pointer"
-        >
-          Add
-        </button>
-      </div>
-    </form>
+    <TodoForm @add="handleAdd" />
 
     <ol class="flex flex-col justify-start items-start gap-2 mt-5">
       <li v-for="item in lists" :key="item.id">
