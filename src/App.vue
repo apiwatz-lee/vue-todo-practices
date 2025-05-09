@@ -74,7 +74,12 @@ watch(
           placeholder="เช่น ซื้อข้าว"
           class="border rounded-full p-2"
         />
-        <button type="submit" class="border p-2 rounded-full w-24">Add</button>
+        <button
+          type="submit"
+          class="border p-2 rounded-full w-24 cursor-pointer"
+        >
+          Add
+        </button>
       </div>
     </form>
 
@@ -94,13 +99,13 @@ watch(
           </span>
           <button
             @click="handleEdit(item.id)"
-            class="border p-2 rounded-full w-24"
+            class="border p-2 rounded-full w-24 cursor-pointer"
           >
             Edit
           </button>
           <button
             @click="handleDelete(item.id)"
-            class="border p-2 rounded-full w-24"
+            class="border p-2 rounded-full w-24 cursor-pointer"
           >
             Delete
           </button>
@@ -115,7 +120,7 @@ watch(
           />
           <button
             @click="handleSave(item.id, item.keyword)"
-            class="border p-2 rounded-full w-24"
+            class="border p-2 rounded-full w-24 cursor-pointer"
           >
             Save
           </button>
