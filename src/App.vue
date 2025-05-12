@@ -1,6 +1,7 @@
 <script setup>
 import { ref, watch } from 'vue';
 import TodoForm from './components/TodoForm.vue';
+import TodoList from './components/TodoList.vue';
 
 // generate unique id
 let idCounter = 0;
@@ -62,50 +63,13 @@ const toggleCompleted = (item) => {
 <template>
   <main class="container mx-auto w-fit">
     <TodoForm @add="handleAdd" />
-
-    <ol class="flex flex-col justify-start items-start gap-2 mt-5">
-      <li v-for="item in lists" :key="item.id">
-        <div v-if="item.id !== editId" class="flex gap-2">
-          <input
-            type="checkbox"
-            :checked="item.isCompleted"
-            @change="toggleCompleted(item)"
-          />
-          <span
-            class="flex justify-center items-center w-fit"
-            :class="[item.isCompleted && 'line-through text-gray-400']"
-          >
-            {{ item.keyword }}
-          </span>
-          <button
-            @click="handleEdit(item.id)"
-            class="border p-2 rounded-full w-24 cursor-pointer"
-          >
-            Edit
-          </button>
-          <button
-            @click="handleDelete(item.id)"
-            class="border p-2 rounded-full w-24 cursor-pointer"
-          >
-            Delete
-          </button>
-        </div>
-
-        <div v-else class="flex gap-2">
-          <input
-            type="text"
-            v-model="item.keyword"
-            class="border p-2 rounded-full"
-            @keyup.enter="handleSave(item.id, item.keyword)"
-          />
-          <button
-            @click="handleSave(item.id, item.keyword)"
-            class="border p-2 rounded-full w-24 cursor-pointer"
-          >
-            Save
-          </button>
-        </div>
-      </li>
-    </ol>
+    <TodoList
+      :lists="lists"
+      :editId="editId"
+      @toggleCompleted="toggleCompleted"
+      @handleEdit="handleEdit"
+      @handleDelete="handleDelete"
+      @handleSave="handleSave"
+    />
   </main>
 </template>
