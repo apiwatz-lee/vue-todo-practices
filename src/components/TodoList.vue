@@ -1,5 +1,9 @@
 <script setup>
-const props = defineProps(['lists', 'editId']);
+import InputText from './InputText.vue';
+defineProps({
+  lists: Array,
+  editId: Number,
+});
 const emit = defineEmits([
   'toggleCompleted',
   'handleEdit',
@@ -26,8 +30,8 @@ const handleSave = (id, keyword) => {
 
 <template>
   <ol class="flex flex-col justify-start items-start gap-2 mt-5">
-    <li v-for="item in props.lists" :key="item.id">
-      <div v-if="item.id !== props.editId" class="flex gap-2">
+    <li v-for="item in lists" :key="item.id">
+      <div v-if="item.id !== editId" class="flex gap-2">
         <input
           type="checkbox"
           :checked="item.isCompleted"

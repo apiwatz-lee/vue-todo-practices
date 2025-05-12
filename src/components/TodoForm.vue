@@ -1,5 +1,6 @@
 <script setup>
 import { ref } from 'vue';
+import InputText from './InputText.vue';
 
 const emit = defineEmits(['add']);
 const keyword = ref('');
@@ -17,12 +18,7 @@ const onAdd = () => {
   >
     <label class="text-center">Todolist</label>
     <div class="flex gap-5">
-      <input
-        v-model="keyword"
-        type="text"
-        placeholder="เช่น ซื้อข้าว"
-        class="border rounded-full p-2"
-      />
+      <InputText v-model="keyword" placeholder="เช่น ซื้อข้าว" />
       <button type="submit" class="border p-2 rounded-full w-24 cursor-pointer">
         Add
       </button>
