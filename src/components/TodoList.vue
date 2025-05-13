@@ -60,7 +60,7 @@ const handleSave = (id, keyword) => {
       <div v-else class="flex gap-2">
         <input
           type="text"
-          v-model="item.keyword"
+          v-model.trim="item.keyword"
           class="border p-2 rounded-full"
           @keyup.enter="handleSave(item.id, item.keyword)"
         />

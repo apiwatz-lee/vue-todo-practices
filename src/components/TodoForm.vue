@@ -18,7 +18,7 @@ const onAdd = () => {
   >
     <label class="text-center">Todolist</label>
     <div class="flex gap-5">
-      <InputText v-model:keyword="keyword" placeholder="เช่น ซื้อข้าว" />
+      <InputText v-model:keyword.trim="keyword" placeholder="เช่น ซื้อข้าว" />
       <button type="submit" class="border p-2 rounded-full w-24 cursor-pointer">
         Add
       </button>

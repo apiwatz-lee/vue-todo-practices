@@ -11,17 +11,14 @@ const editId = ref(0);
 
 // Add new item
 const handleAdd = (keyword) => {
-  const trimmed = keyword.value.trim();
-  if (!trimmed) return;
+  if (!keyword.value) return;
 
   lists.value.push({
     id: generateId(),
-    keyword: trimmed,
+    keyword: keyword.value,
     isEdit: false,
     isCompleted: false,
   });
-
-  keyword.value = '';
 };
 
 // Delete item by id
@@ -36,11 +33,10 @@ const handleEdit = (id) => {
 
 // Save edited item
 const handleSave = (id, newKeyword) => {
-  const trimmed = newKeyword.trim();
-  if (!trimmed) return;
+  if (!newKeyword) return;
   const item = lists.value.find((i) => i.id === id);
   if (item) {
-    item.keyword = trimmed;
+    item.keyword = newKeyword;
     item.isEdit = false;
     editId.value = 0;
   }
