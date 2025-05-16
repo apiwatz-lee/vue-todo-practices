@@ -1,5 +1,4 @@
 <script setup>
-import InputText from './InputText.vue';
 defineProps({
   lists: Array,
   editId: Number,

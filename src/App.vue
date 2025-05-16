@@ -3,9 +3,6 @@ import { ref, watch } from 'vue';
 import TodoForm from './components/TodoForm.vue';
 import TodoList from './components/TodoList.vue';
 
-// generate unique id
-let idCounter = 0;
-const generateId = () => ++idCounter;
 const lists = ref([]);
 const editId = ref(0);
 
@@ -14,7 +11,7 @@ const handleAdd = (keyword) => {
   if (!keyword.value) return;
 
   lists.value.push({
-    id: generateId(),
+    id: crypto.randomUUID(),
     keyword: keyword.value,
     isEdit: false,
     isCompleted: false,
@@ -47,13 +44,13 @@ const toggleCompleted = (item) => {
   item.isCompleted = !item.isCompleted;
 };
 
-// watch(
-//   lists,
-//   (newVal) => {
-//     console.log('--- new ----', newVal);
-//   },
-//   { deep: true }
-// );
+watch(
+  lists,
+  (newVal) => {
+    console.log('--- new ----', newVal);
+  },
+  { deep: true }
+);
 </script>
 
 <template>

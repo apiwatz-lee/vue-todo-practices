@@ -12,10 +12,7 @@ const onAdd = () => {
 </script>
 
 <template>
-  <form
-    @submit.prevent="onAdd()"
-    class="flex flex$-col items-center gap-2 mt-5"
-  >
+  <form @submit.prevent="onAdd()" class="flex flex-col items-center gap-2 mt-5">
     <label class="text-center">Todolist</label>
     <div class="flex gap-5">
       <InputText v-model:keyword.trim="keyword" placeholder="เช่น ซื้อข้าว" />
